@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeShareApi", "RecipeShareApi\RecipeShareApi.csproj", "{35ACDCF2-D043-4314-B2AA-1AF366C8A632}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35ACDCF2-D043-4314-B2AA-1AF366C8A632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35ACDCF2-D043-4314-B2AA-1AF366C8A632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35ACDCF2-D043-4314-B2AA-1AF366C8A632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35ACDCF2-D043-4314-B2AA-1AF366C8A632}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D9322C2-9B9B-45D2-8E64-B0E564DC0E01}
+	EndGlobalSection
+EndGlobal
