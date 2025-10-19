@@ -1,0 +1,82 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using RecipeShareApi.Data;
+using RecipeShareApi.Models;
+using RecipeShareApi.Services.Interface;
+using System;
+
+namespace RecipeShareApi.Services.Implementation
+{
+    public class RecipeService : IRecipeService
+    {
+        private readonly RecipeDbContext _recipeDbContext;
+        private readonly ILogger<RecipeService> _logger;
+
+        public RecipeService(RecipeDbContext recipeDbContext, ILogger<RecipeService> logger)
+        {
+            _recipeDbContext = recipeDbContext;
+            _logger = logger;
+        }
+
+        public async Task<Recipe> AddRecipeAsync(Recipe recipe)
+        {
+            _recipeDbContext.Recipes.Add(recipe);
+            await _recipeDbContext.SaveChangesAsync();
+            return recipe;
+        }
+
+        public async Task<bool> DeleteRecipeAsync(int id)
+        {
+            _logger.LogInformation($"Deleting recipe with ID: {id}");
+            var recipe = await _recipeDbContext.Recipes.FindAsync(id);
+            if (recipe == null)
+            {
+                _logger.LogWarning($"Recipe with ID: {id} does not exist");
+                return false;
+            }
+
+            _recipeDbContext.Recipes.Remove(recipe);
+            await _recipeDbContext.SaveChangesAsync();
+            _logger.LogInformation($"Recipe wth ID: {id} deleted successfully.");
+            return true;
+        }
+
+        public async Task<IEnumerable<Recipe>> GetAllRecipesAsync(string? dietaryTag = null)
+        {
+            //IQueryable<Recipe> query = _recipeDbContext.Recipes;
+
+            //if (!string.IsNullOrEmpty(dietaryTag))
+            //{
+            //    query = query.Where(r => r.DietaryTag.Any(tag => string.Equals(tag, dietaryTag, StringComparison.OrdinalIgnoreCase)));
+            //}
+
+            //_logger.LogInformation("Fetching all recipes from database.");
+            return await _recipeDbContext.Recipes.ToListAsync();
+        }
+
+        public async Task<Recipe?> GetRecipeById(int id)
+        {
+            _logger.LogInformation($"Fetching recipe with ID: {id}");
+            return await _recipeDbContext.Recipes.FindAsync(id);
+        }
+
+        public async Task<Recipe?> UpdateRecipeAsync(int id, Recipe recipe)
+        {
+            var recipeExist = await _recipeDbContext.Recipes.FindAsync(id);
+            if (recipeExist == null)
+            {
+                _logger.LogWarning($"Recipe with ID: {id} not found.");
+            }
+
+            recipeExist.Title = recipe.Title;
+            recipeExist.Ingredients = recipe.Ingredients;
+            recipeExist.Steps = recipe.Steps;
+            recipeExist.CookingTime = recipe.CookingTime;
+            recipeExist.DietaryTag = recipe.DietaryTag;
+
+            await _recipeDbContext.SaveChangesAsync();
+            _logger.LogInformation($"Recipe with ID {id} successfully updated.");
+            return recipeExist;
+        }
+    }
+}
