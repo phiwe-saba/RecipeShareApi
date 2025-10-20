@@ -91,6 +91,8 @@ namespace RecipeShareApi.Data
                 CookingTime = "15 minutes",
                 DietaryTag = "Non-Vegetarian"
             });
+
+           
         }
         
     }
