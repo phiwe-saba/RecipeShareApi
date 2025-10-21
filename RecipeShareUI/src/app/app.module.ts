@@ -1,26 +1,36 @@
+/*import { Routes } from '@angular/router';
+import { HomeComponent } from './Recipes/home/home.component';
+
+export const routes: Routes = [
+  { path: '', component: HomeComponent },
+  {
+    path: 'AddRecipe',
+    loadComponent: () =>
+      import('./Recipes/add-recipe/add-recipe.component').then(
+        (m) => m.AddRecipeComponent
+      ),
+  },
+];
+
+*/
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddRecipeComponent } from './Recipes/add-recipe/add-recipe.component';
 import { HomeComponent } from './Recipes/home/home.component';
-import { EditRecipeComponent } from './Recipes/edit-recipe/edit-recipe.component';
-import { ViewRecipeComponent } from './Recipes/view-recipe/view-recipe.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AddRecipeComponent,
-    HomeComponent,
-    EditRecipeComponent,
-    ViewRecipeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    NgbModule,
+    ToastrModule.forRoot()
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
