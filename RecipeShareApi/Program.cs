@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using RecipeShareApi.Data;
 using RecipeShareApi.Orchestration.Implementation;
@@ -33,5 +34,20 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+//app.MapWhen(context => !context.Request.Path.StartsWithSegments("/api"), spaApp =>
+//{
+//    spaApp.UseSpa(spa =>
+//    {
+//        //spa.Options.SourcePath = "ClientApp";
+//        spa.UseAngularCliServer(npmScript: "start");
+
+//        if (app.Environment.IsDevelopment())
+//        {
+//            spa.UseAngularCliServer(npmScript: "start");
+//            //spa.UseProxyToSpaDevelopmentServer("https://localhost:7062");
+//        }
+//    });
+//});
 
 app.Run();

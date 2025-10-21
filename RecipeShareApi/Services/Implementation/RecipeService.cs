@@ -62,42 +62,42 @@ namespace RecipeShareApi.Services.Implementation
 
         public async Task<Recipe?> UpdateRecipeAsync(int id, Recipe recipe)
         {
-            var existing = await _recipeDbContext.Recipes.FindAsync(id);
-            if (existing == null) return null;
+            //var existing = await _recipeDbContext.Recipes.FindAsync(id);
+            //if (existing == null) return null;
 
-            // Update only provided (non-null or valid) fields
-            if (!string.IsNullOrWhiteSpace(recipe.Title))
-                existing.Title = recipe.Title;
+            //// Update only provided (non-null or valid) fields
+            //if (!string.IsNullOrWhiteSpace(recipe.Title))
+            //    existing.Title = recipe.Title;
 
-            if (!string.IsNullOrWhiteSpace(recipe.Steps))
-                existing.Steps = recipe.Steps;
+            //if (!string.IsNullOrWhiteSpace(recipe.Steps))
+            //    existing.Steps = recipe.Steps;
 
-            if (recipe.CookingTime > 0)
-                existing.CookingTime = recipe.CookingTime;
+            //if (recipe.CookingTime > 0)
+            //    existing.CookingTime = recipe.CookingTime;
 
-            if (recipe.Ingredients != null && recipe.Ingredients.Any())
-                existing.Ingredients = recipe.Ingredients;
+            //if (recipe.Ingredients != null && recipe.Ingredients.Any())
+            //    existing.Ingredients = recipe.Ingredients;
 
-            if (recipe.DietaryTag != null && recipe.DietaryTag.Any())
-                existing.DietaryTag = recipe.DietaryTag;
-
-            await _recipeDbContext.SaveChangesAsync();
-            return existing;
-            //var recipeExist = await _recipeDbContext.Recipes.FindAsync(id);
-            //if (recipeExist == null)
-            //{
-            //    _logger.LogWarning($"Recipe with ID: {id} not found.");
-            //}
-
-            //recipeExist.Title = recipe.Title;
-            //recipeExist.Ingredients = recipe.Ingredients;
-            //recipeExist.Steps = recipe.Steps;
-            //recipeExist.CookingTime = recipe.CookingTime;
-            //recipeExist.DietaryTag = recipe.DietaryTag;
+            //if (recipe.DietaryTag != null && recipe.DietaryTag.Any())
+            //    existing.DietaryTag = recipe.DietaryTag;
 
             //await _recipeDbContext.SaveChangesAsync();
-            //_logger.LogInformation($"Recipe with ID {id} successfully updated.");
-            //return recipeExist;
+            //return existing;
+            var recipeExist = await _recipeDbContext.Recipes.FindAsync(id);
+            if (recipeExist == null)
+            {
+                _logger.LogWarning($"Recipe with ID: {id} not found.");
+            }
+
+            recipeExist.Title = recipe.Title;
+            recipeExist.Ingredients = recipe.Ingredients;
+            recipeExist.Steps = recipe.Steps;
+            recipeExist.CookingTime = recipe.CookingTime;
+            recipeExist.DietaryTag = recipe.DietaryTag;
+
+            await _recipeDbContext.SaveChangesAsync();
+            _logger.LogInformation($"Recipe with ID {id} successfully updated.");
+            return recipeExist;
         }
     }
 }
