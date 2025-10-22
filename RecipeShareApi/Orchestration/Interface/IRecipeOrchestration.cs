@@ -6,8 +6,9 @@ namespace RecipeShareApi.Orchestration.Interface
     {
         Task<Recipe?> GetRecipeById(int id);
         Task<Recipe> AddRecipeAsync(Recipe recipe);
-        Task<IEnumerable<Recipe>> GetAllRecipesAsync(string? dietaryTag);
+        Task<IEnumerable<Recipe>> GetAllRecipesByTagAsync(string? dietaryTag);
         Task<Recipe?> UpdateRecipeAsync(int id, Recipe recipe);
+        Task<IEnumerable<Recipe>> GetAllRecipesAsync();
         Task<bool> DeleteRecipeAsync(int id);
     }
 }

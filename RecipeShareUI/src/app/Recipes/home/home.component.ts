@@ -1,14 +1,15 @@
 import { Component, OnInit, Type } from '@angular/core';
 import { Router, RouterModule  } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
+import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { HttpProviderService } from '../../Services/http-provider.service';
 import { NgModalConfirm } from '../../ng-modal-confirm/ng-modal-confirm.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterModule, CommonModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule, NgbModule, ToastrModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })

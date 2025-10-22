@@ -41,7 +41,12 @@ namespace RecipeShareApi.Services.Implementation
             return true;
         }
 
-        public async Task<IEnumerable<Recipe>> GetAllRecipesAsync(string? dietaryTag = null)
+        public async Task<IEnumerable<Recipe>> GetAllRecipesAsync()
+        {
+            return await _recipeDbContext.Recipes.ToListAsync();
+        }
+
+        public async Task<IEnumerable<Recipe>> GetAllRecipesByTagAsync(string? dietaryTag = null)
         {
             //IQueryable<Recipe> query = _recipeDbContext.Recipes;
 

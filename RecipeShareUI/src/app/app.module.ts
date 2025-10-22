@@ -21,6 +21,9 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Recipes/home/home.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,12 @@ import { HomeComponent } from './Recipes/home/home.component';
   imports: [
     BrowserModule,
     NgbModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HomeComponent,
+    HttpClientModule,
+    ReactiveFormsModule,
+    AppRoutingModule
+    
   ],
   bootstrap: [AppComponent]
 })

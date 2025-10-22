@@ -43,10 +43,16 @@ namespace RecipeShareApi.Orchestration.Implementation
             }
         }
 
-        public async Task<IEnumerable<Recipe>> GetAllRecipesAsync([FromQuery] string? dietaryTag)
+        public async Task<IEnumerable<Recipe>> GetAllRecipesByTagAsync([FromQuery] string? dietaryTag)
         {
             _logger.LogInformation($"");
-            return await _recipeService.GetAllRecipesAsync(dietaryTag);
+            return await _recipeService.GetAllRecipesByTagAsync(dietaryTag);
+        }
+
+        public async Task<IEnumerable<Recipe>> GetAllRecipesAsync()
+        {
+            _logger.LogInformation($"");
+            return await _recipeService.GetAllRecipesAsync();
         }
 
         public async Task<Recipe?> GetRecipeById(int id)

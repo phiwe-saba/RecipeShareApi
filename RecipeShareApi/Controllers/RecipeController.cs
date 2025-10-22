@@ -16,10 +16,17 @@ namespace RecipeShareApi.Controllers
             _recipeOrchestration = recipeOrchestration;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllRecipes([FromQuery] string? dietaryTag)
+        [HttpGet("{string}")]
+        public async Task<IActionResult> GetAllRecipesByTagAsync([FromQuery] string? dietaryTag)
         {
-            var recipes = await _recipeOrchestration.GetAllRecipesAsync(dietaryTag);
+            var recipes = await _recipeOrchestration.GetAllRecipesByTagAsync(dietaryTag);
+            return Ok(recipes);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllRecipesAsync()
+        {
+            var recipes = await _recipeOrchestration.GetAllRecipesAsync();
             return Ok(recipes);
         }
 

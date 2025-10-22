@@ -10,7 +10,14 @@ const routes: Routes = [
   { path: 'Home', component: HomeComponent},
   { path: 'ViewRecipe/:recipeId', component: ViewRecipeComponent},
   { path: 'EditRecipe/:emploeeId', component: EditRecipeComponent},
-  { path: 'AddRecipe', component: AddRecipeComponent}
+  //{ path: 'AddRecipe', component: AddRecipeComponent}
+  {
+    path: 'AddRecipe',
+    loadComponent: () =>
+      import('./Recipes/add-recipe/add-recipe.component').then(
+        (m) => m.AddRecipeComponent
+      ),
+  },
 ];
 
 @NgModule({

@@ -26,7 +26,11 @@
         <tbody>
           <tr *ngFor="let recipe of recipeList" class="center-align">
             <td>{{ recipe.Title }}</td>
-            <td>{{ recipe.Ingredients }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let ingredient of recipe.Ingredients">{{ ingredient }}</li>
+              </ul>
+            </td>
             <td>{{ recipe.Steps }}</td>
             <td>{{ recipe.CookingTime }}</td>
             <td>{{ recipe.DietaryTag }}</td>

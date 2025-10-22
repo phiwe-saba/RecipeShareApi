@@ -11,8 +11,8 @@ using RecipeShareApi.Data;
 namespace RecipeShareApi.Migrations
 {
     [DbContext(typeof(RecipeDbContext))]
-    [Migration("20251020165618_initialcommit")]
-    partial class initialcommit
+    [Migration("20251021154203_InitialCommit")]
+    partial class InitialCommit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
