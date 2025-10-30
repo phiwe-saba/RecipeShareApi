@@ -21,9 +21,7 @@
   - `GetAllRecipes_ReturnsJsonContent()`
 <img width="1198" height="172" alt="image" src="https://github.com/user-attachments/assets/897e506a-7b52-4509-ae3a-f3ad453c2582" />
 
- 
-- **Edge Cases**:
-  - Requesting non-existent recipes.
 
 - **Benchmarking**:
   - GET `GetAllRecipes_500SequentialRequests()`
+  
