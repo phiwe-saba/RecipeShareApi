@@ -11,7 +11,6 @@ A simple Restful API to manage recipes using C#, Angular and MS SQL Server. Appl
    dotnet restore
    
 3. Seed data: 
-   Add-Migration
    Update-Databse
    
 5. Run API: 
