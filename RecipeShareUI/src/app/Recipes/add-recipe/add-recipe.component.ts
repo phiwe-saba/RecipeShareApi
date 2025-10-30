@@ -3,12 +3,12 @@ import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } fr
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpProviderService } from '../../Services/http-provider.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-add-recipe',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NgIf],
   templateUrl: './add-recipe.component.html',
   styleUrls: ['./add-recipe.component.css']
 })
@@ -66,6 +66,8 @@ export class AddRecipeComponent implements OnInit {
     }
 
     const recipeData = this.recipeForm.value;
+
+    console.log("log: ", recipeData);
 
     this.httpProvider.addRecipe(recipeData).subscribe({
       next: () => {

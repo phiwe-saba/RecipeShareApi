@@ -38,7 +38,7 @@ namespace RecipeShareApi.Data
                     "Season with salt and pepper.",
                     "Serve sauce over cooked spaghetti."
                 },
-                CookingTime = "30 minutes",
+                CookingTime = 30,
                 DietaryTag = "Non-Vegetarian"
             });
 
@@ -65,7 +65,7 @@ namespace RecipeShareApi.Data
                     "Stir in soy sauce and cook for another 2 minutes.",
                     "Serve hot with rice or noodles."
                 },
-                CookingTime = "20 minutes",
+                CookingTime = 20,
                 DietaryTag = "Vegan"
             });
 
@@ -88,7 +88,7 @@ namespace RecipeShareApi.Data
                     "Drizzle with Caesar dressing and toss to combine.",
                     "Serve immediately."
                 },
-                CookingTime = "15 minutes",
+                CookingTime = 15,
                 DietaryTag = "Non-Vegetarian"
             });
 

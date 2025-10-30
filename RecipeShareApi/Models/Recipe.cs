@@ -17,7 +17,7 @@ namespace RecipeShareApi.Models
         public List<string> Steps { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage = "Cooking time must be greater than zero")]
-        public string CookingTime { get; set; }
+        public int CookingTime { get; set; }
 
         public string DietaryTag { get; set; }
     }

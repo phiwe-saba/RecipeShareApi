@@ -19,7 +19,7 @@ namespace RecipeShareApi.Orchestration.Implementation
         {
             try
             {
-                _logger.LogInformation("");
+                _logger.LogInformation($"Adding reicpe: {recipe}");
                 return await _recipeService.AddRecipeAsync(recipe);
             }
             catch (Exception ex) 
@@ -45,14 +45,36 @@ namespace RecipeShareApi.Orchestration.Implementation
 
         public async Task<IEnumerable<Recipe>> GetAllRecipesByTagAsync([FromQuery] string? dietaryTag)
         {
-            _logger.LogInformation($"");
-            return await _recipeService.GetAllRecipesByTagAsync(dietaryTag);
+            try
+            {
+                var recipes = await _recipeService.GetAllRecipesByTagAsync(dietaryTag);
+
+                if (recipes == null || !recipes.Any())
+                {
+                    throw new KeyNotFoundException($"No recipes found for the dietary tag: {dietaryTag}");
+                }
+
+                return recipes;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error fetching recipes by dietary tag: {dietaryTag}");
+                throw;
+            }
         }
 
         public async Task<IEnumerable<Recipe>> GetAllRecipesAsync()
         {
-            _logger.LogInformation($"");
-            return await _recipeService.GetAllRecipesAsync();
+            try
+            {
+                var recipes = await _recipeService.GetAllRecipesAsync();
+                return recipes ?? Enumerable.Empty<Recipe>();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occured fetching all recipes");
+                throw;
+            }
         }
 
         public async Task<Recipe?> GetRecipeById(int id)

@@ -44,19 +44,29 @@ namespace RecipeShareApi.Services.Implementation
         public async Task<IEnumerable<Recipe>> GetAllRecipesAsync()
         {
             return await _recipeDbContext.Recipes.ToListAsync();
+
         }
 
         public async Task<IEnumerable<Recipe>> GetAllRecipesByTagAsync(string? dietaryTag = null)
         {
-            //IQueryable<Recipe> query = _recipeDbContext.Recipes;
+            IQueryable<Recipe> query = _recipeDbContext.Recipes;
 
-            //if (!string.IsNullOrEmpty(dietaryTag))
-            //{
-            //    query = query.Where(r => r.DietaryTag.Any(tag => string.Equals(tag, dietaryTag, StringComparison.OrdinalIgnoreCase)));
-            //}
+            if (!string.IsNullOrEmpty(dietaryTag))
+            {
+                query = query.Where(r => r.DietaryTag.ToLower() == dietaryTag.ToLower());
+            }
 
-            //_logger.LogInformation("Fetching all recipes from database.");
-            return await _recipeDbContext.Recipes.ToListAsync();
+            _logger.LogInformation("No dietary tag provided, fetching all recipes.");
+
+            var recipes = await query.ToListAsync();
+
+            if (recipes == null || !recipes.Any())
+            {
+                _logger.LogError($"No recipes found for the given dietary tag: {dietaryTag}");
+                throw new KeyNotFoundException($"No recipes found for the dietary tag: {dietaryTag}");
+            }
+
+            return recipes;
         }
 
         public async Task<Recipe?> GetRecipeById(int id)

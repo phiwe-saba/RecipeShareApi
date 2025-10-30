@@ -24,10 +24,15 @@ import { HomeComponent } from './Recipes/home/home.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EditRecipeComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     HttpClientModule,
     ReactiveFormsModule,
+    NoopAnimationsModule,
     AppRoutingModule
     
   ],

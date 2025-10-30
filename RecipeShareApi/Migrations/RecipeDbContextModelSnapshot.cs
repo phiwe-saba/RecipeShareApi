@@ -29,9 +29,8 @@ namespace RecipeShareApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CookingTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CookingTime")
+                        .HasColumnType("int");
 
                     b.Property<string>("DietaryTag")
                         .IsRequired()
@@ -58,7 +57,7 @@ namespace RecipeShareApi.Migrations
                         new
                         {
                             Id = 1,
-                            CookingTime = "30 minutes",
+                            CookingTime = 30,
                             DietaryTag = "Non-Vegetarian",
                             Ingredients = "[\"200g spaghetti\",\"100g minced beef\",\"1 onion, chopped\",\"2 cloves garlic, minced\",\"400g canned tomatoes\",\"2 tbsp olive oil\",\"Salt and pepper to taste\"]",
                             Steps = "[\"Cook spaghetti according to package instructions.\",\"Heat olive oil in a pan and saut\\u00E9 onion and garlic until translucent.\",\"Add minced beef and cook until browned.\",\"Stir in canned tomatoes and simmer for 15 minutes.\",\"Season with salt and pepper.\",\"Serve sauce over cooked spaghetti.\"]",
@@ -67,7 +66,7 @@ namespace RecipeShareApi.Migrations
                         new
                         {
                             Id = 2,
-                            CookingTime = "20 minutes",
+                            CookingTime = 20,
                             DietaryTag = "Vegan",
                             Ingredients = "[\"1 cup broccoli florets\",\"1 cup sliced bell peppers\",\"1 cup snap peas\",\"2 carrots, sliced\",\"2 tbsp soy sauce\",\"1 tbsp sesame oil\",\"2 cloves garlic, minced\",\"1 tsp grated ginger\"]",
                             Steps = "[\"Heat sesame oil in a large pan or wok.\",\"Add garlic and ginger, saut\\u00E9 for 1 minute.\",\"Add all vegetables and stir fry for 5-7 minutes until tender-crisp.\",\"Stir in soy sauce and cook for another 2 minutes.\",\"Serve hot with rice or noodles.\"]",
@@ -76,7 +75,7 @@ namespace RecipeShareApi.Migrations
                         new
                         {
                             Id = 3,
-                            CookingTime = "15 minutes",
+                            CookingTime = 15,
                             DietaryTag = "Non-Vegetarian",
                             Ingredients = "[\"2 chicken breasts, grilled and sliced\",\"1 head romaine lettuce, chopped\",\"1/2 cup croutons\",\"1/4 cup grated Parmesan cheese\",\"Caesar dressing\"]",
                             Steps = "[\"In a large bowl, combine chopped romaine lettuce, croutons, and Parmesan cheese.\",\"Top with sliced grilled chicken.\",\"Drizzle with Caesar dressing and toss to combine.\",\"Serve immediately.\"]",

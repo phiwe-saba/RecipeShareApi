@@ -10,24 +10,16 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 export class WebApiService {
   constructor(private httpClient: HttpClient) {}
 
-  //Get call method
-  get(url: string): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'ápplication/json',
-        'Çache-Control': 'no-cache',
-        'Pragma': 'no-cache'
-      }),
-      observe: 'response' as 'body'
-    };
-    return this.httpClient.get(
-      url,
-      httpOptions
-    )
-    .pipe(
-      map((response: any) => this.ReturnResponseData(response)),
-      catchError(this.handleError)
-    );
+  public get(url: string): Observable<any> {
+    return this.httpClient.get(url, { observe: 'body' });
+  }
+
+  public delete(url: string): Observable<any> {
+    return this.httpClient.delete(url, { observe: 'body'});
+  }
+
+  public put(url: string, model: any): Observable<any> {
+    return this.httpClient.put(url, model)
   }
 
   // Post call method

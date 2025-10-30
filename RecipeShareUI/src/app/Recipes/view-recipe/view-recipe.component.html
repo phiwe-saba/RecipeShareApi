@@ -1,1 +1,40 @@
-<p>view-recipe works!</p>
+<div class="container mt-4" *ngIf="recipe; else notFound">
+  <div class="card shadow p-4">
+    <h2 class="text-center mb-4">{{ recipe.title }}</h2>
+
+    <div class="mb-3">
+      <h5>Ingredients:</h5>
+      <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+      </ul>
+    </div>
+
+    <div class="mb-3">
+      <h5>Steps:</h5>
+      <ol>
+        <li *ngFor="let step of recipe.steps">{{ step }}</li>
+      </ol>
+    </div>
+
+    <div class="mb-3">
+      <h5>Cooking Time:</h5>
+      <p>{{ recipe.cookingTime }} minutes</p>
+    </div>
+
+    <div class="mb-3">
+      <h5>Dietary Tag:</h5>
+      <span class="badge bg-info text-dark">{{ recipe.dietaryTag }}</span>
+    </div>
+    <a href="" class="btn btn-warning text-white mt-3" [routerLink]="['/EditRecipe', recipe.id]" >Edit</a>
+    <button class="btn btn-secondary mt-3" (click)="goBack()">Back to Recipes</button>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="text-center mt-5">
+    <h4>Recipe not found.</h4>
+    <button class="btn btn-primary" (click)="goBack()">Back</button>
+    <button class="btn btn-secondary">Edit</button>
+    
+  </div>
+</ng-template>

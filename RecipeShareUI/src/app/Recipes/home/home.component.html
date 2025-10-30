@@ -2,12 +2,84 @@
   <div class="table-responsive">
     <div class="table-wrapper">
       <div class="table-title">
+        <div class="row align-items-center">
+          <div class="col-sm-6">
+            <h4><b>Manage Recipes</b></h4>
+          </div>
+          <div class="col-sm-6 text-end">
+            <button class="btn btn-success" (click)="AddRecipe()">
+              <i class="fas fa-plus-circle"></i> ADD
+            </button>
+          </div>
+        </div>
+
+        <!-- Tag Filter Section -->
+        <div class="row mt-3">
+          <div class="col-sm-4">
+            <select [(ngModel)]="selectedTag" (change)="filterByTag()" class="form-select">
+              <option value="" disabled selected>Select Dietary Tag</option>
+              <option *ngFor="let tag of dietaryTags" [value]="tag">{{ tag }}</option>
+            </select>
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-primary w-100" (click)="filterByTag()">Filter</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recipe Table -->
+      <table class="table table-striped table-hover table-bordered mt-4">
+        <thead>
+          <tr class="center-align">
+            <th>Title</th>
+            <th>Ingredients</th>
+            <th>Steps</th>
+            <th>Cooking Time</th>
+            <th>Dietary Tag</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let recipe of filteredRecipes" class="center-align">
+            <td>{{ recipe.title }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+              </ul>
+            </td>
+            <td>
+              <ol>
+                <li *ngFor="let step of recipe.steps">{{ step }}</li>
+              </ol>
+            </td>
+            <td>{{ recipe.cookingTime }} minutes</td>
+            <td>{{ recipe.dietaryTag }}</td>
+            <td>
+              <a href="#" [routerLink]="['/ViewRecipe/', recipe.id]" class="btn btn-info text-white"><i class='fas fa-eye view'>View</i></a>
+              
+              <button type="button" (click)="deleteRecipeConfirmation(recipe.id)" class="btn btn-danger mt-3"><i class='fas fa-trash-alt delete'>Delete</i></button>
+            </td>
+          </tr>
+          <tr *ngIf="!filteredRecipes.length">
+            <td colspan="6" class="text-center">No Recipes Found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!--<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
         <div class="row">
           <div class="col-sm-6">
             <h4><b>Manage Recipe</b></h4>
           </div>
           <div class="col-sm-6">
-            <button class="btn btn-success" (click)="AddRecipe()">
+            <button class="btn btn-success mt-3" (click)="AddRecipe()">
               <i class='fas fa-plus-circle'></i><span> ADD</span>
             </button>
           </div>
@@ -25,26 +97,30 @@
         </thead>
         <tbody>
           <tr *ngFor="let recipe of recipeList" class="center-align">
-            <td>{{ recipe.Title }}</td>
+            <td>{{ recipe.title }}</td>
             <td>
               <ul>
-                <li *ngFor="let ingredient of recipe.Ingredients">{{ ingredient }}</li>
+                <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
               </ul>
             </td>
-            <td>{{ recipe.Steps }}</td>
-            <td>{{ recipe.CookingTime }}</td>
-            <td>{{ recipe.DietaryTag }}</td>
             <td>
-              <a href="#" [routerLink]="['/ViewRecipe/', recipe.id]" class="btn"><i class='fas fa-eye view'></i></a>
-              <a href="#" [routerLink]="['/EditRecipe/', recipe.id]" class="btn"><i class="fa fa-edit edit"></i></a>
-              <button type="button" (click)="deleteRecipeConfirmation(recipe)" class="btn"><i class='fas fa-trash-alt delete'></i></button>
+              <ol>
+                <li *ngFor="let step of recipe.steps">{{ step }}</li>
+              </ol>
+            </td>
+            <td>{{ recipe.cookingTime }}</td>
+            <td>{{ recipe.dietaryTag }}</td>
+            <td>
+              <a href="#" [routerLink]="['/ViewRecipe/', recipe.id]" class="btn btn-info text-white"><i class='fas fa-eye view'>View</i></a>
+              
+              <button type="button" (click)="deleteRecipeConfirmation(recipe.id)" class="btn btn-danger mt-3"><i class='fas fa-trash-alt delete'>Delete</i></button>
             </td>
           </tr>
           <tr>
-            <td *ngIf="recipeList.length == 0" colspan="6">No Recipe Found</td>
+            <td *ngIf="!recipeList.length" colspan="6">No Recipe Found</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-</div>
+</div>-->

@@ -1,22 +1,37 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Recipe } from '../models/recipe.model';
+import { Recipe } from '../Interfaces/recipe';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
+  private rootUrl = 'https://localhost:7062/api/Recipe';
+
   constructor(private http: HttpClient) {}
 
-  /*retrieveAllRecipes(recipe: Recipe): Observable<any> {
-    var rootUrl = 'https://localhost:7062/api/Recipe';
+  addRecipe(recipe: Recipe): Observable<any> {
+    return this.http.post(this.rootUrl, recipe);
+  }
 
-    console.log("URL", rootUrl);
+  getAllRecipes(): Observable<any> {
+    return this.http.get(this.rootUrl);
+  }
 
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    //return this.http.get(rootUrl, recipe, { headers })
+  getAllRecipesByTag(tag: string): Observable<Recipe[]> {
+    return this.http.get<Recipe[]>(`$this.rootUrl/filter?dietaryTag=${tag}`);
+  }
 
-  }*/
-  
+  getRecipeById(id: number): Observable<Recipe> {
+    return this.http.get<Recipe>(`${this.rootUrl}/${id}`);
+  }
+
+  updateRecipe(id: number, recipe: Recipe): Observable<any> {
+    return this.http.put(`$this.rootUrl/${id}`, recipe);
+  }
+
+  deleteRecipeById(id: number): Observable<any> {
+    return this.http.delete(`${this.rootUrl}/${id}`)
+  }
 }

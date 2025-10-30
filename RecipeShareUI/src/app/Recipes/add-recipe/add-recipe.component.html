@@ -1,44 +1,192 @@
-<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
+<div class="container mt-5 mb-5 p-4 shadow-lg rounded bg-light">
+  <h3 class="text-center mb-4 text-success fw-bold">Add New Recipe</h3>
+
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <!-- Title -->
+    <div class="form-group mb-3">
+      <label class="form-label fw-semibold">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="title"
+        placeholder="Enter recipe title"
+      />
+      <div
+        *ngIf="recipeForm.get('title')?.invalid && isSubmitted"
+        class="text-danger small mt-1"
+      >
+        Title is required and cannot exceed 100 characters.
+      </div>
+    </div>
+
+    <!-- Ingredients -->
+    <div class="form-group mb-3" formArrayName="ingredients">
+      <label class="form-label fw-semibold">Ingredients</label>
+
+      <div *ngFor="let ingredient of ingredients.controls; let i = index" class="mb-2">
+        <div class="input-group">
+          <input
+            type="text"
+            [formControlName]="i"
+            class="form-control"
+            placeholder="Enter ingredient"
+          />
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="removeIngredient(i)"
+          >
+            <i class="bi bi-trash"></i> Remove
+          </button>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-outline-primary btn-sm mt-2"
+        (click)="addIngredient()"
+      >
+        + Add Ingredient
+      </button>
+
+      <div
+        *ngIf="recipeForm.get('ingredients')?.invalid && isSubmitted"
+        class="text-danger small mt-1"
+      >
+        At least one ingredient is required.
+      </div>
+    </div>
+
+    <!-- Steps -->
+    <div class="form-group mb-3" formArrayName="steps">
+      <label class="form-label fw-semibold">Steps</label>
+
+      <div *ngFor="let step of steps.controls; let i = index" class="mb-2">
+        <div class="input-group">
+          <input
+            type="text"
+            [formControlName]="i"
+            class="form-control"
+            placeholder="Enter step"
+          />
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="removeStep(i)"
+          >
+            <i class="bi bi-trash"></i> Remove
+          </button>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-outline-primary btn-sm mt-2"
+        (click)="addStep()"
+      >
+        + Add Step
+      </button>
+
+      <div
+        *ngIf="recipeForm.get('steps')?.invalid && isSubmitted"
+        class="text-danger small mt-1"
+      >
+        At least one step is required.
+      </div>
+    </div>
+
+    <!-- Cooking Time -->
+    <div class="form-group mb-3">
+      <label class="form-label fw-semibold">Cooking Time (minutes)</label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="cookingTime"
+        placeholder="e.g., 30"
+      />
+      <div
+        *ngIf="recipeForm.get('cookingTime')?.invalid && isSubmitted"
+        class="text-danger small mt-1"
+      >
+        Please enter a valid cooking time.
+      </div>
+    </div>
+
+    <!-- Dietary Tag -->
+    <div class="form-group mb-4">
+      <label class="form-label fw-semibold">Dietary Tag</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="dietaryTag"
+        placeholder="e.g., Vegan, Keto, etc."
+      />
+      <div
+        *ngIf="recipeForm.get('dietaryTag')?.invalid && isSubmitted"
+        class="text-danger small mt-1"
+      >
+        Please enter a dietary tag.
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-success mt-3">Submit</button>
+      <button type="submit" class="btn btn-secondary ml-4">Back</button>
+    </div>
+  </form>
+</div>
+
+<!--<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+  <div class="form-group mt-3">
     <label>Title</label>
-    <input
-      type="text"
-      class="form-control"
-      formControlName="title"
-      placeholder="Enter recipe title"
-    />
+    <input type="text" class="form-control" formControlName="title" placeholder="Enter recipe title"/>
     <div *ngIf="recipeForm.get('title')?.invalid && isSubmitted" class="text-danger">
       Title is required and cannot exceed 100 characters.
     </div>
   </div>
 
-  <div formArrayName="ingredients">
+  <div class="mt-3" formArrayName="ingredients">
     <label>Ingredients</label>
     <div *ngFor="let ingredient of ingredients.controls; let i = index">
       <input type="text" [formControlName]="i" class="form-control mb-2" />
+      <button type="button" class="btn btn-secondary mt-2 ml-2" (click)="addIngredient()">+ Add Ingredient</button>
       <button type="button" class="btn btn-danger btn-sm" (click)="removeIngredient(i)">Remove</button>
     </div>
-    <button type="button" class="btn btn-secondary mt-2" (click)="addIngredient()">+ Add Ingredient</button>
+    <div *ngIf="recipeForm.get('ingredients')?.invalid && isSubmitted" class="text-danger">
+      At least one ingredient is required
+    </div>
   </div>
 
-  <div formArrayName="steps">
+  <div class="mt-3" formArrayName="steps">
     <label>Steps</label>
     <div *ngFor="let step of steps.controls; let i = index">
-      <textarea [formControlName]="i" class="form-control mb-2"></textarea>
+      <input type="text" [formControlName]="i" class="form-control mb-2">
+      <button type="button" class="btn btn-secondary mt-2" (click)="addStep()">+ Add Step</button>
       <button type="button" class="btn btn-danger btn-sm" (click)="removeStep(i)">Remove</button>
     </div>
-    <button type="button" class="btn btn-secondary mt-2" (click)="addStep()">+ Add Step</button>
+    <div *ngIf="recipeForm.get('steps')?.invalid && isSubmitted" class="text-danger">
+      At least one step is required
+    </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group mt-3">
     <label>Cooking Time (minutes)</label>
     <input type="number" class="form-control" formControlName="cookingTime" />
+    <div *ngIf="recipeForm.get('cookingTime')?.invalid && isSubmitted" class="text-danger">
+      Enter valid cooking time, enter step
+    </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group mt-3">
     <label>Dietary Tag</label>
     <input type="text" class="form-control" formControlName="dietaryTag" />
+    <div *ngIf="recipeForm.get('dietaryTag')?.invalid && isSubmitted" class="text-danger">
+      Field cannot be empty, please enter dietary tag
+    </div>
   </div>
 
   <button type="submit" class="btn btn-success mt-3">Submit</button>
+  <button type="submit" class="btn btn-secondary ml-4">Back</button>
 </form>
+-->
